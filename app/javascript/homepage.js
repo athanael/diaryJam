@@ -11,5 +11,5 @@ document.addEventListener("DOMContentLoaded", function() {
           behavior: "smooth"
         });
       }
-    }, 1000);
+    }, 5000);
   });

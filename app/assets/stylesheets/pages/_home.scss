@@ -1,1 +1,199 @@
-// Specific CSS for your home-page
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+body {
+  background-color: $background;
+  margin: 0;
+  padding: 0;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f7e3c7;
+  overflow: hidden;
+  position: relative;
+}
+
+.main-content {
+  display: none;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+body:not(.no-scroll) .main-content {
+  opacity: 1;
+}
+
+.shape {
+  position: absolute;
+  opacity: 0;
+  animation: fadeInShapes 1s ease-in-out forwards;
+  background-color: $dj-purple;
+
+  &.shape1 {
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 40%;
+    border-bottom-right-radius: 50%;
+    animation-delay: 0.5s;
+  }
+
+  &.shape2 {
+    bottom: 0;
+    right: 0;
+    width: 60%;
+    height: 50%;
+    border-top-left-radius: 50%;
+    animation-delay: 1s;
+  }
+}
+
+.site-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 6vw;
+  color: white;
+  opacity: 0;
+  animation: fadeInTitle 4s ease-in-out forwards;
+  text-align: center;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.instrument {
+  position: absolute;
+  opacity: 0;
+  animation: fadeInInstruments 1s ease-in-out forwards;
+
+  &.guitar {
+    bottom: 8%;
+    left: 11%;
+    rotate: -20deg;
+    width: 12vw;
+    animation-delay: 1.5s;
+  }
+
+  &.saxophone {
+    top: 11%;
+    left: 15%;
+    width: 8vw;
+    rotate: 20deg;
+    animation-delay: 2s;
+  }
+
+  &.piano {
+    top: -24%;
+    right: -3%;
+    width: 18vw;
+    rotate: -48deg;
+    animation-delay: 2.5s;
+  }
+
+  &.hat {
+    top: 22%;
+    left: 62%;
+    width: 6vw;
+    animation-delay: 3s;
+  }
+
+  &.violin {
+    bottom: 10%;
+    right: 9%;
+    rotate: 30deg;
+    width: 10vw;
+    animation-delay: 3.5s;
+  }
+}
+
+@keyframes fadeInShapes {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInInstruments {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInTitle {
+  0% {
+    opacity: 0;
+    color: white;
+  }
+  50% {
+    color: #3d3d63;
+  }
+  80% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+    color: #2d2d76;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-title {
+    font-size: 8vw !important;
+  }
+
+  .instrument {
+    width: 20vw !important;
+  }
+
+  .shape {
+    width: 50% !important;
+    height: 40% !important;
+  }
+
+  .piano {
+    top: -13% !important;
+    right: -3% !important;
+    width: 20vw !important;
+    rotate: -48deg !important;
+    animation-delay: 2.5s !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-title {
+    font-size: 10vw !important;
+  }
+
+  .instrument {
+    width: 25vw !important;
+  }
+
+  .piano {
+    top: -15% !important;
+    right: -6% !important;
+    width: 32vw !important;
+    rotate: -48deg !important;
+    animation-delay: 2.5s !important;
+  }
+}
+
+.card {
+  background-color: $dj-purple;
+}

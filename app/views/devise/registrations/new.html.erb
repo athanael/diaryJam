@@ -6,6 +6,27 @@
       <%= f.error_notification %>
 
       <div class="form-inputs mb-3">
+        <%= f.input :first_name,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "first-name", class: "form-control" },
+                    label: "Prénom",
+                    label_html: { class: "form-label" } %>
+
+        <%= f.input :last_name,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "last-name", class: "form-control" },
+                    label: "Nom",
+                    label_html: { class: "form-label" } %>
+
+        <%= f.input :username,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "user-name", class: "form-control" },
+                    label: "Nom d'utilisateur",
+                    label_html: { class: "form-label" } %>
+
         <%= f.input :email,
                     required: true,
                     autofocus: true,

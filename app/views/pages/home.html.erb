@@ -43,7 +43,7 @@
       </div>
     </div>
   </div>
-  <% if user_signed_in? %>
+  <% if user_signed_in? && current_user.is_connected_to_spotify? %>
     <h2>Dernières Écoutes</h2>
     <% if @tracks.present? %>
       <ul>
@@ -60,5 +60,6 @@
     <% end %>
   <% else %>
     <p>Connectez-vous pour voir vos dernières écoutes.</p>
+
   <% end %>
 </body>

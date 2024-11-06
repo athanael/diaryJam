@@ -7,4 +7,4 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin "bootstrap", to: "bootstrap.min.js", preload: true
 pin "@popperjs/core", to: "popper.js", preload: true
-pin "homepage", preload: true, to: "homepage.js"
+pin_all_from 'app/javascript/src', under: 'src', to: 'src'

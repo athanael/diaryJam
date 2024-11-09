@@ -7,4 +7,8 @@ class User < ApplicationRecord
 
   # Validations
   validates :first_name, :last_name, :username, :email, presence: true
+
+  has_many :tracks, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 end

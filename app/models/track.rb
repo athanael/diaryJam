@@ -1,8 +1,5 @@
 class Track < ApplicationRecord
-  belongs_to :album
-  has_many :reviews, as: :reviewable
-  has_many :comments, as: :commentable
-  has_many :likes, as: :likeable
+  belongs_to :user
 
-  validates :title, presence: true
+  validates :spotify_id, presence: true
 end

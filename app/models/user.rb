@@ -4,11 +4,11 @@ class User < ApplicationRecord
   :recoverable, :rememberable, :validatable
 
   # Associations
-  has_many :friendships
-  has_many :comments
-  has_many :reviews
-  has_many :likes
 
   # Validations
   validates :first_name, :last_name, :username, :email, presence: true
+
+  has_many :tracks, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 end

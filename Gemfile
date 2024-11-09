@@ -78,3 +78,4 @@ end
 
 gem 'omniauth'
 gem 'omniauth-spotify'
+gem 'faker'

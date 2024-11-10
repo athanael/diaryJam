@@ -2,4 +2,24 @@
 <h1><%= @post.title %></h1>
 <p><%= @post.content %></p>
 
-<%= link_to "Back to all posts", posts_path %> <!-- Link to go back to the posts list -->
+<%= link_to "Back to all posts", posts_path %>
+
+<div class="post-card">
+  <!-- User Avatar and Information -->
+  <div class="user-info d-flex">
+    <% if @post.user.avatar.present? %>
+      <%= image_tag @post.user.avatar, alt: "User Avatar", class: "avatar rounded-circle", style: "width: 50px; height: 50px;" %>
+    <% else %>
+      <%= image_tag "default-avatar.png", alt: "Default Avatar", class: "avatar rounded-circle", style: "width: 50px; height: 50px;" %>
+    <% end %>
+
+    <div class="ml-3">
+      <h5 class="card-title"><%= @post.user.username %></h5>
+      <p class="text-muted"><%= @post.created_at.strftime("%B %d, %Y") %></p>
+    </div>
+  </div>
+
+  <!-- Post Content -->
+  <h3 class="post-title"><%= @post.title %></h3>
+  <p class="post-content"><%= @post.content %></p>
+</div>

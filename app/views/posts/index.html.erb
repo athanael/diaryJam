@@ -1,10 +1,40 @@
-<!-- app/views/posts/index.html.erb -->
-<h1>All Posts</h1>
+<h2>All Posts</h2>
 
-<% @posts.each do |post| %>
-  <div class="post">
-    <h2><%= post.title %></h2>
-    <p><%= post.content %></p>
-    <%= link_to "Read more", post_path(post) %> <!-- Link to individual post -->
-  </div>
-<% end %>
+<div class="posts-container">
+  <% @posts.each do |post| %>
+    <div class="post-card">
+      <!-- User Avatar and Information -->
+      <div class="user-info d-flex">
+        <!-- Circular Avatar (Profile Picture) -->
+        <% if post.user.avatar.present? %>
+          <%= image_tag post.user.avatar, alt: "User Avatar", class: "avatar avatar-circle" %>
+        <% else %>
+          <%= image_tag "default-avatar.png", alt: "Default Avatar", class: "avatar avatar-circle" %>
+        <% end %>
+
+        <div class="ml-3">
+          <h5 class="card-title"><%= post.user.username %></h5>
+          <p class="text-muted"><%= post.created_at.strftime("%B %d, %Y") %></p>
+        </div>
+      </div>
+
+      <!-- Rectangular Avatar (Near 'Post by' Text) -->
+      <div class="user-info d-flex">
+        <% if post.user.avatar.present? %>
+          <%= image_tag post.user.avatar, alt: "User Avatar", class: "avatar avatar-rect" %>
+        <% else %>
+          <%= image_tag "default-avatar.png", alt: "Default Avatar", class: "avatar avatar-rect" %>
+        <% end %>
+
+        <div class="ml-3">
+          <p class="text-muted">Post by</p>
+        </div>
+      </div>
+
+      <!-- Post Content -->
+      <h3 class="post-title"><%= post.title %></h3>
+      <p class="post-content"><%= truncate(post.content, length: 100) %></p>
+      <%= link_to "Read more", post_path(post), class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

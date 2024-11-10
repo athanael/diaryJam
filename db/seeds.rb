@@ -41,3 +41,14 @@ users.each_with_index do |user, index|
 end
 
 puts "Ça a marché !"
+
+users.each_with_index do |user, index|
+  Post.find_or_create_by!(
+    user: user,
+    track: Track.find_by(spotify_id: track_ids[index]),
+    title: "Post by #{user.username}",
+    content: Faker::Lorem.paragraph
+  )
+end
+
+puts "Users, Tracks, and Posts have been created!"

@@ -26,7 +26,6 @@ users = 5.times.map do |i|
     user.username = "User#{i + 1}"
     user.first_name = Faker::Name.first_name
     user.last_name = Faker::Name.last_name
-    user.spotify_id = Faker::Number.number(digits: 10)
   end
 end
 

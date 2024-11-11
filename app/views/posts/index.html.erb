@@ -3,38 +3,20 @@
 <div class="posts-container">
   <% @posts.each do |post| %>
     <div class="post-card">
-      <!-- User Avatar and Information -->
-      <div class="user-info d-flex">
-        <!-- Circular Avatar (Profile Picture) -->
+      <!-- User Info Section with Circular Avatar -->
+      <div class="user-info d-flex align-items-center">
         <% if post.user.avatar.present? %>
           <%= image_tag post.user.avatar, alt: "User Avatar", class: "avatar avatar-circle" %>
         <% else %>
           <%= image_tag "default-avatar.png", alt: "Default Avatar", class: "avatar avatar-circle" %>
         <% end %>
 
-        <div class="ml-3">
-          <h5 class="card-title"><%= post.user.username %></h5>
-          <p class="text-muted"><%= post.created_at.strftime("%B %d, %Y") %></p>
+        <div class="user-details">
+          <h5 class="username"><%= post.user.username %></h5>
+          <p class="post-text"><%= post.title %></p>
         </div>
       </div>
-
-      <!-- Rectangular Avatar (Near 'Post by' Text) -->
-      <div class="user-info d-flex">
-        <% if post.user.avatar.present? %>
-          <%= image_tag post.user.avatar, alt: "User Avatar", class: "avatar avatar-rect" %>
-        <% else %>
-          <%= image_tag "default-avatar.png", alt: "Default Avatar", class: "avatar avatar-rect" %>
-        <% end %>
-
-        <div class="ml-3">
-          <p class="text-muted">Post by</p>
-        </div>
-      </div>
-
-      <!-- Post Content -->
-      <h3 class="post-title"><%= post.title %></h3>
-      <p class="post-content"><%= truncate(post.content, length: 100) %></p>
-      <%= link_to "Read more", post_path(post), class: "btn btn-primary" %>
+       <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/<%= post.track.spotify_id %>?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
   <% end %>
 </div>

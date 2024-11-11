@@ -42,19 +42,29 @@
   margin: 10px 0;
 }
 
-.profile-header button {
-  background-color: #333;
+/* Boutons dans l'en-tête du profil */
+.profile-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.profile-header .btn-spotify,
+.profile-header .btn-logout {
+  background-color: #1DB954; /* Couleur Spotify */
   color: #fff;
   padding: 8px 16px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  margin-top: 10px;
   font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
 }
 
-.profile-header button:hover {
-  background-color: #555;
+.profile-header .btn-spotify:hover,
+.profile-header .btn-logout:hover {
+  background-color: #1aa34a;
 }
 
 /* Fil d'activité */
@@ -79,8 +89,10 @@
   border-radius: 5px;
 }
 
-.activity-post h4 {
-  font-weight: bold;
+.activity-post p {
+  font-size: 16px;
+  color: #333;
+  margin: 0;
 }
 
 .comments-section {
@@ -89,8 +101,11 @@
 
 .comments-section h5 {
   font-weight: bold;
+  font-size: 14px;
 }
 
 .comments-section p {
   margin: 5px 0;
+  font-size: 14px;
+  color: #555;
 }

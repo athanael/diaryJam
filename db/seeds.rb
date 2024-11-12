@@ -1,43 +1,51 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+require 'open-uri'
+require 'cloudinary'
 
-# Création de 5 utilisateurs
-users = 5.times.map do |i|
-  User.find_or_create_by!(
-    email: "user#{i + 1}@example.com"
-  ) do |user|
-    user.password = "password"
-    user.username = "User#{i + 1}"
-    user.first_name = Faker::Name.first_name
-    user.last_name = Faker::Name.last_name
-    user.spotify_id = Faker::Number.number(digits: 10)
-  end
-end
-
+User.destroy_all
 # IDs de morceaux Spotify pour le testing
 track_ids = [
   "4uLU6hMCjMI75M1A2tKUQC", # Rick Roll
-  "1dGr1c8CrMLDpV6mPbImSI", # The Weeknd - Blinding Lights
-  "2P89NOLNfrwXRuotuqDxXr", # Realo - 2 SEC
-  "1YOHWN62HHDszsqg5zQbo7", # kuru - save;File-9
-  "3n4blG5eQN10jGA5LnNt6W"  # Lucy Bedroque - SISTERHOOD (LOVE, HER.)
+  "3H7ihDc1dqLriiWXwsc2po", # The Weeknd - Blinding Lights
+  "29P9xbKLiQY2UzWJBvY2mB", # Realo - 2 SEC
+  "2YoHh6nEm0sRsqsSbOzb07", # kuru - save;File=9
+  "3hab5OEl2ksbNbG1AsLNw6"  # Lucy Bedroque - SISTERHOOD (LOVE, HER.)
 ]
 
-# Création de 5 tracks + assignation à chaque utilisateur
-users.each_with_index do |user, index|
-  Track.find_or_create_by!(
-    spotify_id: track_ids[index],
-    user: user
-  ) do |track|
-    track.title = Faker::Music::RockBand.song
-  end
-end
+# Création de 4 utilisateurs avec photos de profil
+User.create!(
+  email: 'imad@diaryjam.fr',
+  password: 'azerty',
+  first_name: 'Imad',
+  last_name: 'Belhadri',
+  username: 'imadbelhadri',
+  profile_image_url: 'https://res.cloudinary.com/dxolsqoem/image/upload/v1731369783/e8biamqsueqxqteyjnv4.jpg'
+)
 
-puts "Ça a marché !"
+User.create!(
+  email: 'athanael@diaryjam.fr',
+  password: 'azerty',
+  first_name: 'Athanael',
+  last_name: 'Gerard',
+  username: 'athanaelgerard',
+  profile_image_url: 'https://res.cloudinary.com/dxolsqoem/image/upload/v1731369783/xgnsg0eoii8hvesehb0y.png'
+)
+
+User.create!(
+  email: 'damien@diaryjam.fr',
+  password: 'azerty',
+  first_name: 'Damien',
+  last_name: 'Merian',
+  username: 'damienmerian',
+  profile_image_url: 'https://res.cloudinary.com/dxolsqoem/image/upload/v1731369783/cj80nxdsmciofyeavver.png'
+)
+
+User.create!(
+  email: 'argjent@diaryjam.fr',
+  password: 'azerty',
+  first_name: 'Argjent',
+  last_name: 'Goga',
+  username: 'argjentgoga',
+  profile_image_url: 'https://res.cloudinary.com/dxolsqoem/image/upload/v1731369783/bcvv1sgsb3qnowwxbkg4.jpg'
+)
+
+puts "4 utilisateurs avec photos de profil créés avec succès !"

@@ -3,16 +3,16 @@
     <%= link_to image_tag("favicon.ico", alt: "Accueil", class: "corner-icon"), root_path %>
   </div>
   <div class="profile-title">
-    <h1>Profil de <%= @user.username %></h1>
+    <h1>Profil de <%= @user.first_name %> <%= @user.last_name %> </h1>
   </div>
 </div>
 
 <div class="profile-header">
-  <%= image_tag("default_user.jpg", class: "avatar") %>
+  <%= image_tag(@user.profile_image_url, class: 'avatar') if @user.profile_image_url.present? %>
   <h2><%= @user.first_name %> <%= @user.last_name %></h2>
   <div class="profile-buttons">
     <button class="btn-spotify">Mon Spotify</button>
-    <%= link_to "Déconnexion", destroy_user_session_path, data: {turbo_method: :delete}, class: "btn-spotify" %>
+    <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn-spotify" %>
   </div>
 </div>
 

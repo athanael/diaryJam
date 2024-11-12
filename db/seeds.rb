@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'cloudinary'
+require 'rspotify'
 
 User.destroy_all
 # IDs de morceaux Spotify pour le testing
@@ -63,4 +64,3 @@ users.each_with_index do |user, index|
 end
 
 puts "4 utilisateurs avec photos de profil créés avec succès !"
-

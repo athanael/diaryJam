@@ -48,4 +48,14 @@ User.create!(
   profile_image_url: 'https://res.cloudinary.com/dxolsqoem/image/upload/v1731369783/bcvv1sgsb3qnowwxbkg4.jpg'
 )
 
+# Création de 5 tracks + assignation à chaque utilisateur
+users.each_with_index do |user, index|
+  Track.find_or_create_by!(
+    spotify_id: track_ids[index],
+    user: user
+  ) do |track|
+    track.title = Faker::Music::RockBand.song
+  end
+end
+
 puts "4 utilisateurs avec photos de profil créés avec succès !"

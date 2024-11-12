@@ -1,25 +1,50 @@
-<!-- app/views/posts/show.html.erb -->
-<h1><%= @post.title %></h1>
-<p><%= @post.content %></p>
-
-<%= link_to "Back to all posts", posts_path %>
-
-<div class="post-card">
-  <!-- User Avatar and Information -->
-  <div class="user-info d-flex">
+<div class="post-show-container">
+   <div class="user-info d-flex align-items-center">
     <% if @post.user.avatar.present? %>
-      <%= image_tag @post.user.avatar, alt: "User Avatar", class: "avatar rounded-circle", style: "width: 50px; height: 50px;" %>
+      <%= image_tag @post.user.avatar, alt: "User Avatar", class: "avatar avatar-circle" %>
     <% else %>
-      <%= image_tag "default-avatar.png", alt: "Default Avatar", class: "avatar rounded-circle", style: "width: 50px; height: 50px;" %>
+      <%= image_tag "default-avatar.png", alt: "Default Avatar", class: "avatar avatar-circle" %>
     <% end %>
 
-    <div class="ml-3">
-      <h5 class="card-title"><%= @post.user.username %></h5>
-      <p class="text-muted"><%= @post.created_at.strftime("%B %d, %Y") %></p>
+    <div class="user-details">
+      <h5 class="username"><%= @post.user.username %></h5>
+      <p class="post-time text-muted"><%= time_ago_in_words(@post.created_at) %> ago</p>
     </div>
   </div>
 
-  <!-- Post Content -->
-  <h3 class="post-title"><%= @post.title %></h3>
-  <p class="post-content"><%= @post.content %></p>
+  <div class="post-content">
+    <h3 class="post-title"><%= @post.title %></h3>
+    <p class="post-text"><%= @post.content %></p>
+  </div>
+
+  <% if @post.track.present? %>
+    <div class="post-spotify">
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/<%= @post.track.spotify_id %>?utm_source=generator" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+  <% end %>
+
+  <div class="post-reactions d-flex align-items-center">
+    <span>❤️ 😆 👏</span>
+    <span class="likes">
+      <span id="like-count-<%= @post.id %>"><%= @post.likes_count %></span> Likes
+    </span>
+  </div>
+
+
+  <div class="comments-section">
+    <h4>Comments</h4>
+    <% @post.comments.each do |comment| %>
+      <div class="comment">
+        <strong><%= comment.user.username %>:</strong> <%= comment.content %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= form_with(model: [@post, @post.comments.build], local: true) do |form| %>
+    <div class="form-group">
+      <%= form.label :content, "Add a comment" %>
+      <%= form.text_area :content, class: "form-control" %>
+    </div>
+    <%= form.submit "Post Comment", class: "btn btn-primary" %>
+  <% end %>
 </div>

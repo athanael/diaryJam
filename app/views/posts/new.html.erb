@@ -1,0 +1,16 @@
+<div class="container" id="create_post">
+  <h1>Créer un post</h1>
+  <%= simple_form_for(@post) do |post| %>
+      <div class="form-inputs mb-3">
+        <%= post.input :content,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "content", class: "form-control" },
+                    label: "Contenu de votre post",
+                    label_html: { class: "form-label" }
+        %>
+      <div class="form-actions text-center">
+        <%= button_to "Poster", posts_path(@post), method: :post, class: "btn mt-5 mb-5", id: "new_post_button" %>
+      </div>
+    <% end %>
+</div>

@@ -43,23 +43,4 @@
       </div>
     </div>
   </div>
-  <% if user_signed_in? && current_user.is_connected_to_spotify? %>
-    <h2>Dernières Écoutes</h2>
-    <% if @tracks.present? %>
-      <ul>
-        <% @tracks.each do |track| %>
-          <li>
-            <strong><%= track.name %></strong> par <%= track.artist %>
-            <br>
-            <img src="<%= track.album_image_url %>" alt="<%= track.name %> cover" style="width: 100px;" />
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>Aucune écoute récente disponible.</p>
-    <% end %>
-  <% else %>
-    <p>Connectez-vous pour voir vos dernières écoutes.</p>
-
-  <% end %>
 </body>

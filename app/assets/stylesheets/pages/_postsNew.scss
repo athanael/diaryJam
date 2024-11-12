@@ -1,0 +1,14 @@
+#create_post {
+  width: 80%;
+  margin: 35px auto;
+  background-color: $dj-purple;
+  & h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-top: 20px;
+  }
+}
+
+#new_post_button {
+  background-color: $background;
+}

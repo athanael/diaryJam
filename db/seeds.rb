@@ -8,6 +8,15 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+# Destruction des données existantes
+
+puts "Destruction des données existantes..."
+
+User.destroy_all
+Track.destroy_all
+
+puts "Données existantes détruites !"
+
 # IDs de morceaux Spotify pour le testing
 track_ids = [
   "4PTG3Z6ehGkBFwjybzWkR8", # Rick Roll

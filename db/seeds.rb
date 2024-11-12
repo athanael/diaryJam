@@ -2,6 +2,7 @@ require 'open-uri'
 require 'cloudinary'
 require 'rspotify'
 
+puts "Création de 4 utilisateurs avec photos de profil..."
 User.destroy_all
 # IDs de morceaux Spotify pour le testing
 track_ids = [
@@ -12,6 +13,7 @@ track_ids = [
   "3hab5OEl2ksbNbG1AsLNw6"  # Lucy Bedroque - SISTERHOOD (LOVE, HER.)
 ]
 
+puts "Connexion à Spotify..."
 # Création de 4 utilisateurs avec photos de profil
 User.create!(
   email: 'imad@diaryjam.fr',
@@ -49,18 +51,25 @@ User.create!(
   profile_image_url: 'https://res.cloudinary.com/dxolsqoem/image/upload/v1731369783/bcvv1sgsb3qnowwxbkg4.jpg'
 )
 
-users.each_with_index do |user, index|
-  spotify_track = RSpotify::Track.find(track_ids[index])
+users = User.all
 
-  Track.find_or_create_by!(
-    spotify_id: spotify_track.id,
-    user: user
-  ) do |track|
-    track.title = spotify_track.name
-    track.artist = spotify_track.artists.first.name
-    track.preview_url = spotify_track.preview_url
-    track.image_url = spotify_track.album.images.first['url'] if spotify_track.album.images.any?
-  end
-end
+puts "Création de 5 morceaux pour chaque utilisateur..."
+#   users.each_with_index do |user, index|
+#   puts index
+#   puts user
+
+#   puts track_ids[index]
+#   spotify_track = RSpotify::Track.find(track_ids[index])
+
+#   Track.find_or_create_by!(
+#     spotify_id: spotify_track.id,
+#     user: user
+#   ) do |track|
+#     track.title = spotify_track.name
+#     track.artist = spotify_track.artists.first.name
+#     track.preview_url = spotify_track.preview_url
+#     track.image_url = spotify_track.album.images.first['url'] if spotify_track.album.images.any?
+#   end
+# end
 
 puts "4 utilisateurs avec photos de profil créés avec succès !"

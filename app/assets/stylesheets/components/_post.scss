@@ -1,6 +1,6 @@
 .posts-container {
   .post-card {
-    background-color: #f8ca75;
+    background-color: #F4F4F4;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 16px;
@@ -164,4 +164,12 @@
     border-radius: 5px;
     padding: 10px;
   }
+}
+
+.comment-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: #606770; /* Adjust color to match your design */
+  vertical-align: middle;
+  margin-right: 4px;
 }

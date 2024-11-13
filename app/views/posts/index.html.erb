@@ -1,6 +1,7 @@
 <h2>All Posts</h2>
 
 <div class="posts-container">
+  <%= render "new" %>
   <% @posts.each do |post| %>
     <%= render "post", post: post%>
   <% end %>

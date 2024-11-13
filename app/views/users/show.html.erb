@@ -14,11 +14,5 @@
 </div>
 
 <div class="activity-feed">
-  <h3>Mon activité :</h3>
-  <% @tracks.each do |track| %>
-    <div class="activity-post">
-      <p>Durée : <%= track.duration %></p>
-      <p>Commentaires :</p>
-    </div>
-  <% end %>
+  <%= render "posts/post" %>
 </div>

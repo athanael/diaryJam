@@ -53,6 +53,18 @@ User.create!(
 
 users = User.all
 
+users.each do |user|
+  track_ids.each do |track_id|
+    spotify_track = RSpotify::Track.find(track_id)
+    user.tracks.create!(
+      spotify_id: spotify_track.id,
+      title: spotify_track.name,
+      artist: spotify_track.artists.first.name,
+      duration: spotify_track.duration_ms / 1000 # en secondes
+    )
+  end
+end
+
 puts "Création de 5 morceaux pour chaque utilisateur..."
 #   users.each_with_index do |user, index|
 #   puts index

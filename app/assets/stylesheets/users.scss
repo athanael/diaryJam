@@ -109,3 +109,39 @@
   font-size: 14px;
   color: #555;
 }
+
+.track-carousel {
+  text-align: center;
+  margin: 20px 0;
+
+  .carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 0 auto;
+
+    .carousel-arrow {
+      cursor: pointer;
+      font-size: 24px;
+      color: #0D6EFD;
+      margin: 0 10px;
+    }
+
+    .carousel-tracks {
+      width: 200px;
+      overflow: hidden;
+
+      .track-item {
+        background-color: #9a5cdf;
+        padding: 15px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #F4F4F4;
+        display: none; // pour masquer tous les éléments sauf l'actuel
+      }
+    }
+  }
+}

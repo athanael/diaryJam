@@ -15,10 +15,25 @@
 
 <div class="activity-feed">
   <h3>Mon activité :</h3>
-  <% @tracks.each do |track| %>
+  <% @activities.each do |activity| %>
     <div class="activity-post">
-      <p>Durée : <%= track.duration %></p>
-      <p>Commentaires :</p>
+      <p><%= activity.content %></p>
+      <p><strong>Date :</strong> <%= activity.created_at.strftime('%d/%m/%Y') %></p>
     </div>
   <% end %>
+</div>
+
+<div class="track-carousel">
+  <h3>Mes derniers morceaux likés :</h3>
+  <div class="carousel-container">
+    <span class="carousel-arrow left-arrow">←</span>
+    <div class="carousel-tracks">
+      <% @tracks.each do |track| %>
+        <div class="track-item">
+          <p class="track-title"><%= track.title %> - <%= track.artist %></p>
+        </div>
+      <% end %>
+    </div>
+    <span class="carousel-arrow right-arrow">→</span>
+  </div>
 </div>

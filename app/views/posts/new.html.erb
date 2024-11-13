@@ -1,0 +1,53 @@
+<h1>Créer un nouveau post</h1>
+
+<%= form_with(model: @post, local: true) do |form| %>
+  <% if @post.errors.any? %>
+    <div class="errors">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :track_title %>
+    <%= form.text_field :track_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :artist_name %>
+    <%= form.text_field :artist_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cover_url %>
+    <%= form.text_field :cover_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :preview_url %>
+    <%= form.text_field :preview_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :review %>
+    <%= form.text_area :review %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :track_id %>
+    <%= form.select :track_id, Track.all.collect { |track| [track.title, track.id] }, include_blank: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Publier" %>
+  </div>
+<% end %>

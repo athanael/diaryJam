@@ -23,13 +23,13 @@
   <% end %>
 </div>
 
-<div class="track-carousel">
+<div class="track-carousel" data-controller="carousel">
   <h3>Mes derniers morceaux likés :</h3>
   <div class="carousel-container">
     <span class="carousel-arrow left-arrow">←</span>
     <div class="carousel-tracks">
       <% @tracks.each do |track| %>
-        <div class="track-item">
+        <div class="track-item" data-carousel-target="trackItem">
           <p class="track-title"><%= track.title %> - <%= track.artist %></p>
         </div>
       <% end %>

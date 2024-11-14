@@ -2,74 +2,64 @@ require 'open-uri'
 require 'cloudinary'
 require 'rspotify'
 
+# Initialiser l'authentification Spotify
+RSpotify::authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'])
+
 puts "Création de 4 utilisateurs avec photos de profil..."
+Post.destroy_all
+Track.destroy_all
 User.destroy_all
-# IDs de morceaux Spotify pour le testing
-track_ids = [
-  "4uLU6hMCjMI75M1A2tKUQC", # Rick Roll
-  "3H7ihDc1dqLriiWXwsc2po", # The Weeknd - Blinding Lights
-  "29P9xbKLiQY2UzWJBvY2mB", # Realo - 2 SEC
-  "2YoHh6nEm0sRsqsSbOzb07", # kuru - save;File=9
-  "3hab5OEl2ksbNbG1AsLNw6"  # Lucy Bedroque - SISTERHOOD (LOVE, HER.)
+
+# IDs de morceaux Spotify pour le testing (quatre morceaux différents pour chaque utilisateur)
+user_track_ids = [
+  ["4uLU6hMCjMI75M1A2tKUQC", "1kuGVB7EU95pJObxwvfwKS", "1BxfuPKGuaTgP7aM0Bbdwr", "1YOHWN62HHDszsqg5zQbo7"],
+  ["4O594chXfv4lHvneDP0Ud0", "5b88tNINg4Q4nrRbrCXUmg", "5PsMbxhgWpJMsouEfDTX6r", "7b71WsDLb8gG0cSyDTFAEW"],
+  ["1R2SZUOGJqqBiLuvwKOT2Y", "2CAK2t1reUgPK6OMgAMURB", "2Foc5Q5nqNiosCNqttzHof", "4YiEKrJuoZGGg3nzTJfONS"],
+  ["2wBW9jGZRRMbQ416NDc7LW", "5vQctmBxi79lyQoc2DDAsP", "4suom7B7d6DQa2YTPBT1lv", "4xJjD28UsZlqbX7tBV3Aj5"]
 ]
 
-puts "Connexion à Spotify..."
 # Création de 4 utilisateurs avec photos de profil
-User.create!(
-  email: 'imad@diaryjam.fr',
-  password: 'azerty',
-  first_name: 'Imad',
-  last_name: 'Belhadri',
-  username: 'imadbelhadri',
-  profile_image_url: 'https://res.cloudinary.com/dxolsqoem/image/upload/v1731369783/e8biamqsueqxqteyjnv4.jpg'
-)
+users_data = [
+  { email: 'imad@diaryjam.fr', first_name: 'Imad', last_name: 'Belhadri', username: 'imadbelhadri', profile_image_url: 'https://res.cloudinary.com/dxolsqoem/image/upload/v1731369783/e8biamqsueqxqteyjnv4.jpg' },
+  { email: 'athanael@diaryjam.fr', first_name: 'Athanael', last_name: 'Gerard', username: 'athanaelgerard', profile_image_url: 'https://res.cloudinary.com/dxolsqoem/image/upload/v1731369783/xgnsg0eoii8hvesehb0y.png' },
+  { email: 'damien@diaryjam.fr', first_name: 'Damien', last_name: 'Merian', username: 'damienmerian', profile_image_url: 'https://res.cloudinary.com/dxolsqoem/image/upload/v1731369783/cj80nxdsmciofyeavver.png' },
+  { email: 'argjent@diaryjam.fr', first_name: 'Argjent', last_name: 'Goga', username: 'argjentgoga', profile_image_url: 'https://res.cloudinary.com/dxolsqoem/image/upload/v1731369783/bcvv1sgsb3qnowwxbkg4.jpg' }
+]
 
-User.create!(
-  email: 'athanael@diaryjam.fr',
-  password: 'azerty',
-  first_name: 'Athanael',
-  last_name: 'Gerard',
-  username: 'athanaelgerard',
-  profile_image_url: 'https://res.cloudinary.com/dxolsqoem/image/upload/v1731369783/xgnsg0eoii8hvesehb0y.png'
-)
+users = users_data.map { |user_data| User.create!(user_data.merge(password: 'azerty')) }
 
-User.create!(
-  email: 'damien@diaryjam.fr',
-  password: 'azerty',
-  first_name: 'Damien',
-  last_name: 'Merian',
-  username: 'damienmerian',
-  profile_image_url: 'https://res.cloudinary.com/dxolsqoem/image/upload/v1731369783/cj80nxdsmciofyeavver.png'
-)
+puts "Création des morceaux pour chaque utilisateur..."
 
-User.create!(
-  email: 'argjent@diaryjam.fr',
-  password: 'azerty',
-  first_name: 'Argjent',
-  last_name: 'Goga',
-  username: 'argjentgoga',
-  profile_image_url: 'https://res.cloudinary.com/dxolsqoem/image/upload/v1731369783/bcvv1sgsb3qnowwxbkg4.jpg'
-)
+users.each_with_index do |user, index|
+  user_tracks = user_track_ids[index]
+  user_tracks.each do |track_id|
+    spotify_track = RSpotify::Track.find(track_id)
+    user.tracks.create!(
+      spotify_id: spotify_track.id,
+      title: spotify_track.name,
+      artist: spotify_track.artists.first.name,
+      preview_url: spotify_track.preview_url,
+      image_url: spotify_track.album.images.first['url'],
+      duration_ms: spotify_track.duration_ms
+    )
+  end
+end
 
-users = User.all
+# Création de 5 posts pour chaque utilisateur, chacun lié à un des morceaux de l'utilisateur
+posts_data = [
+  { content: "J'adore ce morceau !", track_title: "Title 1", artist_name: "Artiste 1" },
+  { content: "Ce morceau est incroyable !", track_title: "Title 1", artist_name: "Artiste 1" },
+  { content: "Je n'ai pas aimé celui-ci", track_title: "Title 1", artist_name: "Artiste 1" },
+  { content: "Bof Bof", track_title: "Title 1", artist_name: "Artiste 1" },
+  { content: "...", track_title: "Title 1", artist_name: "Artiste 1" }
+]
 
-puts "Création de 5 morceaux pour chaque utilisateur..."
-#   users.each_with_index do |user, index|
-#   puts index
-#   puts user
+users.each do |user|
+  user.tracks.each do |track|
+    posts_data.each do |post_data|
+      user.posts.create!(post_data.merge(track: track))
+    end
+  end
+end
 
-#   puts track_ids[index]
-#   spotify_track = RSpotify::Track.find(track_ids[index])
-
-#   Track.find_or_create_by!(
-#     spotify_id: spotify_track.id,
-#     user: user
-#   ) do |track|
-#     track.title = spotify_track.name
-#     track.artist = spotify_track.artists.first.name
-#     track.preview_url = spotify_track.preview_url
-#     track.image_url = spotify_track.album.images.first['url'] if spotify_track.album.images.any?
-#   end
-# end
-
-puts "4 utilisateurs avec photos de profil créés avec succès !"
+puts "4 utilisateurs avec leurs morceaux et posts créés avec succès !"

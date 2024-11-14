@@ -47,11 +47,11 @@ end
 
 # Création de 5 posts pour chaque utilisateur, chacun lié à un des morceaux de l'utilisateur
 posts_data = [
-  { content: "J'adore ce morceau !" },
-  { content: "Ce morceau est incroyable !" },
-  { content: "Je n'ai pas aimé celui-ci" },
-  { content: "Bof Bof" },
-  { content: "..." }
+  { content: "J'adore ce morceau !", track_title: "Title 1", artist_name: "Artiste 1" },
+  { content: "Ce morceau est incroyable !", track_title: "Title 1", artist_name: "Artiste 1" },
+  { content: "Je n'ai pas aimé celui-ci", track_title: "Title 1", artist_name: "Artiste 1" },
+  { content: "Bof Bof", track_title: "Title 1", artist_name: "Artiste 1" },
+  { content: "...", track_title: "Title 1", artist_name: "Artiste 1" }
 ]
 
 users.each do |user|

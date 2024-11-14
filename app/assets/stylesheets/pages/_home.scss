@@ -197,3 +197,9 @@ body:not(.no-scroll) .main-content {
 .card {
   background-color: $dj-purple;
 }
+
+// color of the post link
+.post-link-wrapper {
+  text-decoration: none;
+  color: black;
+}

@@ -1,5 +1,4 @@
-
-  <div class="post-card">
+<div class="post-card" data-controller="track-search">
   <div class="post-header d-flex align-items-center justify-content-between">
     <div class="user-info d-flex align-items-center">
       <%= image_tag "#{current_user.profile_image_url}", alt: "Default Avatar", class: "avatar avatar-circle" %>
@@ -14,23 +13,36 @@
     <div class="new-post-content d-flex">
       <p id="write-post"><strong>Écrivez un post</strong></p>
       <%= simple_form_for(@post) do |post| %>
-      <div class="form-inputs mb-3">
-        <%= post.input :content,
-                      required: true,
-                      autofocus: true,
-                      label: false,
-                      input_html: { autocomplete: "content", class: "form-control" }
-        %>
-        <div class="form-group">
-          <%= post.input :track_id, label: false, input_html: { autocomplete: "off", class: "form-control", id: "track-search-input", type: "text" } %>
-          <select id="track-suggestions" class="form-control"></select>
+        <div class="form-inputs mb-3">
+          <%= post.input :content,
+                        required: true,
+                        autofocus: true,
+                        label: false,
+                        input_html: { autocomplete: "content", class: "form-control" }
+          %>
+          <div class="form-group" id="music-form">
+            <%= post.input :track_id,
+                           label: false,
+                           input_html: {
+                             autocomplete: "off",
+                             class: "form-control",
+                             id: "track-search-input",
+                             type: "text",
+                             data: {
+                               track_search_target: "input",
+                               action: "input->track-search#search"
+                             }
+                           }
+            %>
+            <div data-track-search-target="results" class="track-results"></div>
+          </div>
+          <%= post.hidden_field :user_id, value: current_user.id %>
+          <%= post.hidden_field :track_id, data: { track_search_target: "trackId" } %>
+          <div class="form-actions text-center">
+            <%= button_to "Poster", posts_path(@post), method: :post, class: "btn mt-5 mb-5", id: "new_post_button" %>
+          </div>
         </div>
-        <%= post.hidden_field :user_id, value: current_user.id %>
-        <div class="form-actions text-center">
-          <%= button_to "Poster", posts_path(@post), method: :post, class: "btn mt-5 mb-5", id: "new_post_button" %>
-        </div>
-      </div>
+      <% end %>
     </div>
-  <% end %>
   </div>
 </div>

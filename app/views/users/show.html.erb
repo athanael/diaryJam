@@ -17,8 +17,8 @@
   <h3>Mon activité :</h3>
   <% @activities.each do |activity| %>
     <div class="activity-post">
-      <p><%= activity.content %></p>
-      <p><strong>Date :</strong> <%= activity.created_at.strftime('%d/%m/%Y') %></p>
+      <p>Durée : <%= track.duration_ms %></p>
+      <p>Commentaires :</p>
     </div>
   <% end %>
 </div>

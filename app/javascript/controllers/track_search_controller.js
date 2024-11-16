@@ -2,7 +2,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["input", "results", "trackId"]
+  static targets = ["input", "results", "trackId", "trackTitle", "artistName"]
 
   connect() {
     console.log("Track search controller connected")
@@ -43,6 +43,8 @@ export default class extends Controller {
         resultItem.classList.add("track-result-item")
         resultItem.textContent = `${track[1]} - ${track[2]}`  // Nom du track
         resultItem.dataset.trackId = track[0]  // ID du track
+        resultItem.dataset.trackTitle = track[1]  // Titre du track
+        resultItem.dataset.artistName = track[2]  // Nom de l'artiste
         resultItem.dataset.action = "click->track-search#select"
         this.resultsTarget.appendChild(resultItem)
       })
@@ -56,6 +58,8 @@ export default class extends Controller {
     const selectedTrack = event.currentTarget
     this.inputTarget.value = selectedTrack.textContent
     this.trackIdTarget.value = selectedTrack.dataset.trackId
+    this.trackTitleTarget.value = selectedTrack.dataset.trackTitle
+    this.artistNameTarget.value = selectedTrack.dataset.artistName
     this.resultsTarget.innerHTML = ""
   }
 }

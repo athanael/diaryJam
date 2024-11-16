@@ -31,14 +31,14 @@ users = users_data.map { |user_data| User.create!(user_data.merge(password: 'aze
 puts "Création des morceaux pour chaque utilisateur..."
 
 
-users.each do |user|
-  track_ids.each do |track_id|
+users.each_with_index do |user, index|
+  user_track_ids[index].each do |track_id|
     spotify_track = RSpotify::Track.find(track_id)
     user.tracks.create!(
       spotify_id: spotify_track.id,
       title: spotify_track.name,
       artist: spotify_track.artists.first.name,
-      duration: spotify_track.duration_ms / 1000 # en secondes
+      duration_ms: spotify_track.duration_ms # Corrigé pour utiliser "duration_ms" comme dans ton schéma
     )
   end
 end

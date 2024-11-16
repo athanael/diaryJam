@@ -1,0 +1,51 @@
+#create_post {
+  width: 80%;
+  margin: 35px auto;
+  background-color: $dj-purple;
+  & h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-top: 20px;
+  }
+}
+
+#new_post_button {
+  background-color: $background;
+}
+
+#write-post {
+  margin-right: 10px;
+  padding-top: 8px;
+}
+
+.new-post-content {
+  width : 100%;
+  & form {
+    width: 90%;
+
+  }
+  & textarea {
+    width: 100%;
+    height: 20px;
+    padding: 0px;
+    & focus {
+      background-color: rgb(248, 202, 117);
+    }
+  }
+}
+
+#music-form {
+  background-color: white;
+  border-left: solid 1px $dj-purple;
+  border-right : solid 1px $dj-purple;
+}
+
+.track-results {
+  border-top: solid 1px $dj-purple;
+  border-bottom: solid 1px $dj-purple;
+}
+
+.posts-container {
+  width: 80%;
+  margin: 35px auto;
+}

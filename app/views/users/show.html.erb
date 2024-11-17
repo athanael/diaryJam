@@ -10,7 +10,29 @@
   <div class="profile-buttons">
     <button class="btn-spotify">Mon Spotify</button>
     <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn-spotify" %>
+
+    <% if current_user != @user %>
+      <% if current_user.following?(@user) %>
+        <%= button_to 'Ne plus suivre', unfollow_user_path(@user), method: :delete, class: 'btn btn-danger' %>
+      <% else %>
+        <%= button_to 'Suivre', follow_user_path(@user), method: :post, class: 'btn btn-primary' %>
+      <% end %>
+    <% end %>
   </div>
+</div>
+
+<div class="followers-info">
+  <% followers_count = @user.favoritors.count %>
+  <p>
+    <%= followers_count %> Followers |
+    <%= link_to "Voir les followers", followers_user_path(@user), class: 'text-blue-500 underline' if followers_count > 0 %>
+  </p>
+
+  <% following_count = @user.all_favorites.size %>
+  <p>
+    <%= following_count %> Following |
+    <%= link_to "Voir les suivis", following_user_path(@user), class: 'text-blue-500 underline' if following_count > 0 %>
+  </p>
 </div>
 
 <div class="activity-feed">

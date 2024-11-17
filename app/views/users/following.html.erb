@@ -1,0 +1,10 @@
+<h2>Utilisateurs suivis par <%= @user.username %></h2>
+
+<% @following.each do |followed| %>
+  <div class="following-item d-flex align-items-center">
+    <% if followed.profile_image_url.present? %>
+      <%= image_tag(followed.profile_image_url, class: 'avatar avatar-small') %>
+    <% end %>
+    <%= link_to followed.username, user_path(followed), class: 'ml-2' %>
+  </div>
+<% end %>

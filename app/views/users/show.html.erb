@@ -41,7 +41,11 @@
   <div class="activity-feed">
     <h3>Mon activité :</h3>
     <% @last_posts.each do |post| %>
-      <%= render "posts/post", post: post %>
+      <%= link_to post_path(post), class: "post-link-wrapper" do %>
+        <div class="scroll-post">
+          <%= render "posts/post", post: post %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

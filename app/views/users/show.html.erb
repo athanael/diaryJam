@@ -22,24 +22,28 @@
 </div>
 
 <div class="followers-info">
-  <% followers_count = @user.favoritors.count %>
-  <p>
-    <%= followers_count %> Followers |
-    <%= link_to "Voir les followers", followers_user_path(@user), class: 'text-blue-500 underline' if followers_count > 0 %>
-  </p>
+  <%= link_to followers_user_path(@user) do %>
+    <% followers_count = @user.favoritors.count %>
+    <p>
+      <%= followers_count %> Followers
+    </p>
+  <% end %>
 
-  <% following_count = @user.all_favorites.size %>
-  <p>
-    <%= following_count %> Following |
-    <%= link_to "Voir les suivis", following_user_path(@user), class: 'text-blue-500 underline' if following_count > 0 %>
-  </p>
+  <%= link_to following_user_path(@user) do %>
+    <% following_count = @user.all_favorites.size %>
+    <p>
+      <%= following_count %> Following
+    </p>
+  <% end %>
 </div>
 
-<div class="activity-feed">
-  <h3>Mon activité :</h3>
-  <% @last_posts.each do |post| %>
-    <%= render "posts/post", post: post %>
-  <% end %>
+<div class="wrapper">
+  <div class="activity-feed">
+    <h3>Mon activité :</h3>
+    <% @last_posts.each do |post| %>
+      <%= render "posts/post", post: post %>
+    <% end %>
+  </div>
 </div>
 
 <div class="track-carousel" data-controller="carousel">
@@ -49,10 +53,20 @@
     <div class="carousel-tracks">
       <% @tracks.each do |track| %>
         <div class="track-item" data-carousel-target="trackItem">
-          <p class="track-title"><%= track.title %> - <%= track.artist %></p>
+          <iframe src="https://open.spotify.com/embed/track/<%= track.spotify_id %>?utm_source=generator"
+              width="100%" height="80px" frameborder="0" allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy" style="border-radius: 12px;"></iframe>
         </div>
       <% end %>
     </div>
     <span class="carousel-arrow right-arrow">→</span>
+  </div>
+</div>
+
+<div class="recommendations">
+  <h3 class="center">Ma recommendation du jour :</h3>
+  <div class="profile-buttons d-flex justify-content-around">
+    <%= link_to "Ma recommendation du jour", recommendations_path(@user), class: "btn-reco" %>
   </div>
 </div>

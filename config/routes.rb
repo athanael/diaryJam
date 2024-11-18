@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   # Health check route
   get "up" => "rails/health#show", as: :rails_health_check
+  get "users/:id/recommendations", to: "users#recommendations", as: :recommendations
 
   resources :users, only: [:show] do
     member do

@@ -1,0 +1,10 @@
+<h2>Followers de <%= @user.username %></h2>
+
+<% @followers.each do |follower| %>
+  <div class="follower-item d-flex align-items-center">
+    <% if follower.profile_image_url.present? %>
+      <%= image_tag(follower.profile_image_url, class: 'avatar avatar-small') %>
+    <% end %>
+    <%= link_to follower.username, user_path(follower), class: 'ml-2' %>
+  </div>
+<% end %>

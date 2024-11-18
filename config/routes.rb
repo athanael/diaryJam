@@ -8,7 +8,15 @@ Rails.application.routes.draw do
   # Health check route
   get "up" => "rails/health#show", as: :rails_health_check
 
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    member do
+      post 'follow', to: 'follows#create'
+      delete 'unfollow', to: 'follows#destroy'
+      get :followers
+      get :following
+    end
+  end
+
   resources :posts do
     resources :comments, only: [:create]
   end
@@ -18,8 +26,4 @@ Rails.application.routes.draw do
       get :search
     end
   end
-
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end

@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.order(created_at: :desc).limit(10)
+    @posts = Post.followers_posts(current_user.followers_id, current_user)
     @post = Post.new
   end
 

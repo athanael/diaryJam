@@ -28,4 +28,12 @@ class User < ApplicationRecord
   def activity_feed
     posts.includes(:user_track, :comments).order(created_at: :desc)
   end
+
+  def followers
+    self.favorites_by_type('User')
+  end
+
+  def followers_id
+    self.followers.pluck(:favoritable_id)
+  end
 end

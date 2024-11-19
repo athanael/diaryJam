@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_action :require_spotify_auth, only: [:show, :recommendations]
+  before_action :spotify_refresh_token
   def show
     @user = User.find(params[:id])
     @last_posts = @user.posts.order(created_at: :desc).limit(5)

@@ -4,7 +4,11 @@
         <%# if post.user.avatar.present? %>
           <%#= image_tag post.user.avatar, alt: "User Avatar", class: "avatar avatar-circle" %>
         <%# else %>
-        <%= image_tag post.user.profile_image_url , alt: "Default Avatar", class: "avatar avatar-circle" %>
+        <% if !post.user.profile_image_url %>
+          <%= image_tag "default_user.jpg", alt: "Default Avatar", class: "avatar avatar-circle" %>
+        <% else %>
+          <%= image_tag post.user.profile_image_url , alt: "Default Avatar", class: "avatar avatar-circle" %>
+        <% end %>
         <%# end %>
         <div class="user-details">
           <h5 class="username"><%= post.user.username %></h5>

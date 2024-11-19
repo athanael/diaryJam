@@ -17,6 +17,6 @@ export default class extends Controller {
           behavior: "smooth"
         });
       }
-    }, 5000);
+    }, 0);
   }
 }

@@ -1,4 +1,5 @@
-<body data-controller="scroll" class="no-scroll">
+<body class="no-scroll">
+  <%= render "shared/navbar" %>
   <div class="background">
     <div class="shape shape1"></div>
     <div class="shape shape2"></div>
@@ -7,59 +8,31 @@
     <%= image_tag "piano.png", class: "instrument piano", alt: "Piano" %>
     <%= image_tag "cymbale.png", class: "instrument hat", alt: "Hat" %>
     <%= image_tag "violoncel.png", class: "instrument violin", alt: "Violin" %>
-    <h1 class="site-title">diaryJam</h1>
-  </div>
-  <div class="main-content">
-    <%= render "shared/navbar" %>
-    <div class="container mt-5">
-      <div class="row justify-content-between">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </div>
-        </div>
-      </div>
+    <div class="text-container">
+      <h1 class="site-title">DiaryJam</h1>
+      <% unless user_signed_in? %>
+        <%= link_to "Se connecter avec Spotify", new_user_session_path, class: "btn-spotify-home" %>
+      <% end %>
     </div>
   </div>
-  <% if user_signed_in? && current_user.is_connected_to_spotify? %>
-    <h2>Dernières Écoutes</h2>
-    <% if @tracks.present? %>
-      <ul>
-        <% @tracks.each do |track| %>
-          <li>
-            <strong><%= track.name %></strong> par <%= track.artist %>
-            <br>
-            <img src="<%= track.album_image_url %>" alt="<%= track.name %> cover" style="width: 100px;" />
-          </li>
-        <% end %>
-      </ul>
+  <div class="main-content">
+    <% if user_signed_in? && current_user.is_connected_to_spotify? %>
+      <h2>Dernières Écoutes</h2>
+      <% if @tracks.present? %>
+        <ul>
+          <% @tracks.each do |track| %>
+            <li>
+              <strong><%= track.name %></strong> par <%= track.artist %>
+              <br>
+              <img src="<%= track.album_image_url %>" alt="<%= track.name %> cover" style="width: 100px;" />
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>Aucune écoute récente disponible.</p>
+      <% end %>
     <% else %>
-      <p>Aucune écoute récente disponible.</p>
+      <p>Connectez-vous pour voir vos dernières écoutes.</p>
     <% end %>
-  <% else %>
-    <p>Connectez-vous pour voir vos dernières écoutes.</p>
-
-  <% end %>
+  </div>
 </body>

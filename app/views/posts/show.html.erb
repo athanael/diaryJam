@@ -1,1 +1,32 @@
-<%= render "post", post: @post %>
+<div class="container">
+  <%= render "post", post: @post %>
+  <div class="comments-section">
+    <div class="comments-list">
+      <% @post.comments.each do |comment| %>
+        <div class="comment">
+          <img src="<%= comment.user.profile_image_url %>" alt="Avatar" class="avatar" />
+
+          <div class="comment-body">
+          <div class="comment-header">
+              <strong class="username"><%= comment.user.username %></strong>
+              <span class="timestamp"><%= time_ago_in_words(comment.created_at) %> ago</span>
+          </div>
+            <p class="comment-content"><%= comment.content %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="comment-form">
+      <h3>Leave a Comment</h3>
+      <%= form_with model: [@post, Comment.new], local: true do |f| %>
+        <div class="form-group">
+          <%= f.text_area :content, rows: 3, placeholder: "Write a comment..." %>
+        </div>
+        <div class="form-actions">
+          <%= f.submit "Post Comment", class: "btn-submit" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

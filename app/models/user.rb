@@ -18,4 +18,8 @@ class User < ApplicationRecord
   def activity_feed
     posts.includes(:user_track, :comments).order(created_at: :desc)
   end
+
+  def name
+    "#{first_name} #{last_name}".strip
+  end
 end

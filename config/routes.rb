@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   # Route for Spotify OAuth callback
   get '/auth/spotify/callback', to: 'sessions#spotify'
+  post '/auth/spotify', as: 'spotify_login'
 
   # Health check route
   get "up" => "rails/health#show", as: :rails_health_check

@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :like, :unlike]
 
+  before_action :require_spotify_auth, only: [:index, :show]
+  before_action :spotify_refresh_token
   def index
     @posts = Post.order(created_at: :desc).limit(10)
     @post = Post.new

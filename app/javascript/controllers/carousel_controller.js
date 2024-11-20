@@ -16,9 +16,9 @@ export default class extends Controller {
     this.rightArrow.addEventListener("click", () => this.nextTrack());
     this.leftArrow.addEventListener("click", () => this.previousTrack());
 
-    // Défilement automatique
-    this.autoScroll = setInterval(() => this.nextTrack(), 5000);
-    console.log("autoScroll", this.autoScroll);
+    // // Défilement automatique
+    // this.autoScroll = setInterval(() => this.nextTrack(), 5000);
+    // console.log("autoScroll", this.autoScroll);
   }
 
   disconnect() {

@@ -9,11 +9,9 @@
     </div>
     <span class="options-icon">⋮</span>
   </div>
-
-  <div class="post-content">
-    <p><strong><%= post.user.username %></strong> <%= truncate(post.content, length: 100) %>...</p>
-  </div>
-
+    <div class="post-content">
+      <p> <%= truncate(post.content, length: 140) %>...</p>
+    </div>
   <div class="post-media">
     <iframe src="https://open.spotify.com/embed/track/<%= post.track.spotify_id %>?utm_source=generator"
             width="100%" height="152" frameborder="0" allowfullscreen=""

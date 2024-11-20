@@ -3,8 +3,8 @@
 <div class="posts-container">
   <%= render "new" %>
   <% @posts.each do |post| %>
-    <%= link_to post_path(post), class: "post-link-wrapper" do %>
-      <%= render "post", post:post %>
-    <% end %>
+    <div class="post-wrapper">
+        <%= render "post", post: post, show_details_button: true %>
+    </div>
   <% end %>
 </div>

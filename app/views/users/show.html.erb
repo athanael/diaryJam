@@ -1,9 +1,3 @@
-<div class="top-bar">
-  <div class="home-icon">
-    <%= link_to image_tag("favicon.ico", alt: "Accueil", class: "corner-icon"), root_path %>
-  </div>
-</div>
-
 <div class="profile-header">
   <%= image_tag(@user.profile_image_url, class: 'avatar') if @user.profile_image_url.present? %>
   <h2><%= @user.first_name %> <%= @user.last_name %></h2>

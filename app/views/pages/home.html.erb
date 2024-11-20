@@ -9,8 +9,10 @@
     <%= image_tag "violoncel.png", class: "instrument violin", alt: "Violin" %>
     <div class="text-container">
       <h1 class="site-title">DiaryJam</h1>
-      <% unless user_signed_in? %>
+      <% if !user_signed_in? %>
         <%= link_to "Se connecter avec Spotify", new_user_session_path, class: "btn-spotify-home" %>
+      <% else %>
+        <%= link_to "Accéder à DiaryJam", posts_path, class: "btn-spotify-home purple" %>
       <% end %>
     </div>
   </div>

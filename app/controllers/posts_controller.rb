@@ -16,25 +16,25 @@ class PostsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+
+  end
 
   def like
     current_user.favorite(@post)
-
     if params[:from] == "index"
-      redirect_to posts_path, notice: "Post liké avec succès !"
+      redirect_to posts_path
     else
-      redirect_to post_path(@post), notice: "Post liké avec succès !"
+      redirect_to post_path(@post)
     end
   end
 
   def unlike
     current_user.unfavorite(@post)
-
     if params[:from] == "index"
-      redirect_to posts_path, notice: "Like retiré avec succès."
+      redirect_to posts_path
     else
-      redirect_to post_path(@post), notice: "Like retiré avec succès."
+      redirect_to post_path(@post)
     end
   end
 

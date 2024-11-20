@@ -24,9 +24,9 @@
   <div class="post-footer d-flex align-items-center">
     <span class="reaction">
       <% if current_user.favorited?(post) %>
-        <%= button_to 'Ne plus aimer', unlike_post_path(post, from: 'index'), method: :delete, class: 'btn btn-danger' %>
+        <%= button_to '👎', unlike_post_path(post, from: 'index'), method: :delete, class: 'bouton' %>
       <% else %>
-        <%= button_to 'Aimer ❤️', like_post_path(post, from: 'index'), method: :post, class: 'btn btn-primary' %>
+        <%= button_to '❤️', like_post_path(post, from: 'index'), method: :post, class: 'bouton' %>
       <% end %>
     </span>
     <span class="likes">

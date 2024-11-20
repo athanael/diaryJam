@@ -9,7 +9,6 @@ class SessionsController < ApplicationController
         spotify_id: auth['uid'],
         email: auth.dig('info', 'email')
       )
-
       user.password = Devise.friendly_token[0, 20] if user.encrypted_password.blank?
       user.username =  auth.dig('info', 'display_name')
       user.profile_image_url = auth.dig('info', 'images', 0, 'url')

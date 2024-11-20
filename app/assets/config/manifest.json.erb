@@ -1,0 +1,17 @@
+{
+  "background_color": "white",
+  "description": "diaryJam is a new social network for people who love to write and share their thoughts and recommendations about their favorite musics.",
+  "display": "fullscreen",
+  "name": "diaryJam",
+  "icons": [
+    <% files = Dir.entries(Rails.root.join("app/assets/images/icons/")).select {|f| !File.directory? f} %>
+    <% files.each_with_index do |file, index| %>
+      <% match = file.match(/.+-(?<size>\d{2,3}x\d{2,3}).png/) %>
+      {
+        "src": "<%= image_path "icons/#{file}" %>",
+        "sizes": "<%= match && match[:size] %>",
+        "type": "image/png"
+      }<%= "," unless (files.size - 1) == index %>
+    <% end %>
+  ]
+}

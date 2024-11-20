@@ -10,7 +10,7 @@
     <div class="text-container">
       <h1 class="site-title">DiaryJam</h1>
       <% if !user_signed_in? %>
-        <%= button_to "se connecter à spotify", spotify_login_path, method: "post", data: {turbo: false} %>
+        <%= button_to "se connecter à spotify", spotify_login_path, method: "post", data: {turbo: false}, class: "btn-spotify-home" %>
       <% else %>
         <%= link_to "Accéder à DiaryJam", posts_path, class: "btn-spotify-home purple" %>
       <% end %>

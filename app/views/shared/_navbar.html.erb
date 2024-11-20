@@ -4,10 +4,6 @@
       <%= image_tag "favicon-96x96.png" %>
     <% end %>
 
-    <% unless user_signed_in? %>
-      <%= link_to "Se connecter", new_user_session_path, class: "nav-link ms-auto btn-connect" %>
-    <% end %>
-
     <% if user_signed_in? %>
       <div class="avatar-menu ms-auto">
         <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

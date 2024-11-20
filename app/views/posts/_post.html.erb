@@ -1,37 +1,42 @@
-  <div class="post-card">
-    <div class="post-header d-flex align-items-center justify-content-between">
-      <div class="user-info d-flex align-items-center">
-        <%# if post.user.avatar.present? %>
-          <%#= image_tag post.user.avatar, alt: "User Avatar", class: "avatar avatar-circle" %>
-        <%# else %>
-        <% if !post.user.profile_image_url %>
-          <%= image_tag "default_user.jpg", alt: "Default Avatar", class: "avatar avatar-circle" %>
-        <% else %>
-          <%= image_tag post.user.profile_image_url , alt: "Default Avatar", class: "avatar avatar-circle" %>
-        <% end %>
-        <%# end %>
-        <div class="user-details">
-          <h5 class="username"><%= post.user.username %></h5>
-          <p class="time-ago"><%= time_ago_in_words(post.created_at) %> ago</p>
-        </div>
+<div class="post-card">
+  <div class="post-header d-flex align-items-center justify-content-between">
+    <div class="user-info d-flex align-items-center">
+      <% if !post.user.profile_image_url %>
+        <%= image_tag "default_user.jpg", alt: "Default Avatar", class: "avatar avatar-circle" %>
+      <% else %>
+        <%= image_tag post.user.profile_image_url , alt: "Default Avatar", class: "avatar avatar-circle" %>
+      <% end %>
+      <div class="user-details">
+        <h5 class="username"><%= post.user.username %></h5>
+        <p class="time-ago"><%= time_ago_in_words(post.created_at) %> ago</p>
       </div>
-      <span class="options-icon">⋮</span>
     </div>
-
-    <div class="post-content">
-      <p><strong><%= post.user.username %></strong> <%= truncate(post.content, length: 100) %>...</p>
-    </div>
-
-    <div class="post-media">
-      <iframe src="https://open.spotify.com/embed/track/<%= post.track.spotify_id %>?utm_source=generator"
-              width="100%" height="152" frameborder="0" allowfullscreen=""
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy" style="border-radius: 12px;"></iframe>
-    </div>
-
-    <div class="post-footer d-flex align-items-center">
-      <span class="reaction">❤️ 😆 👏</span>
-      <span class="likes">Cutsyifa and 15K others</span>
-      <span class="comment-icon">💬</span>
-    </div>
+    <span class="options-icon">⋮</span>
   </div>
+    <div class="post-content">
+      <p> <%= truncate(post.content, length: 140) %>...</p>
+    </div>
+  <div class="post-media">
+    <iframe src="https://open.spotify.com/embed/track/<%= post.track.spotify_id %>?utm_source=generator"
+            width="100%" height="152" frameborder="0" allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy" style="border-radius: 12px;"></iframe>
+  </div>
+
+  <div class="post-footer d-flex align-items-center">
+    <span class="reaction">
+      <% if current_user.favorited?(post) %>
+        <%= button_to '👎', unlike_post_path(post, from: 'index'), method: :delete, class: 'bouton' %>
+      <% else %>
+        <%= button_to '❤️', like_post_path(post, from: 'index'), method: :post, class: 'bouton' %>
+      <% end %>
+    </span>
+    <span class="likes">
+      <%= post.favoritors.count %> likes
+    </span>
+
+      <% if local_assigns[:show_details_button] %>
+        <%= link_to "Voir les détails", post_path(post), class: "btn btn-outline-secondary btn-sm" %>
+      <% end %>
+  </div>
+</div>

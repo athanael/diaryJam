@@ -4,13 +4,12 @@ class PostsController < ApplicationController
   before_action :require_spotify_auth, only: [:index, :show]
   before_action :spotify_refresh_token
   def index
-    @posts = Post.followers_posts(current_user.followers_id, current_user)
+    @posts = Post.where(user_id: [current_user.id] + current_user.followers_id).order(created_at: :desc).limit(15)
     @post = Post.new
   end
 
   def create
     @post = Post.new(post_params)
-
     if @post.save
       redirect_to posts_path
     else

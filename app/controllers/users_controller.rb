@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @tracks = @user.tracks.order(created_at: :asc).limit(15)
   end
 
-    def recommendations
+  def recommendations
       @user = User.find(params[:id])
       @utracks = @user.tracks.map { |track| track.spotify_id }.sample(1)
       @recommendation = RSpotify::Recommendations.generate(seed_tracks: @utracks).tracks

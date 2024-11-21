@@ -1,7 +1,9 @@
 <div class="post-card" id="show-post">
   <div class="post-header d-flex align-items-center justify-content-between">
     <div class="user-info d-flex align-items-center">
-      <%= image_tag @post.user.profile_image_url , alt: "Default Avatar", class: "avatar avatar-circle" %>
+    <% if @post.user.profile_image_url.present? %>
+       <%= image_tag @post.user.profile_image_url , alt: "Default Avatar", class: "avatar avatar-circle" %>
+    <% end %>
       <div class="user-details">
         <h5 class="username"><%= @post.user.username %></h5>
         <p class="time-ago"><%= time_ago_in_words(@post.created_at) %> ago</p>

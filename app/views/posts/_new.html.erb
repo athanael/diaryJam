@@ -10,23 +10,21 @@
         <h5 class="username"><%= current_user.username %></h5>
       </div>
     </div>
-    <span class="options-icon">⋮</span>
   </div>
 
   <div class="post-content">
-    <div class="new-post-content d-flex">
-      <p id="write-post"><strong>Écrivez un post</strong></p>
+    <div class="new-post-content d-flex justify-content-center">
       <%= simple_form_for(@post) do |post| %>
         <div class="form-inputs mb-3">
           <%= post.input :content,
-                        required: true,
+                        required: false,
                         autofocus: true,
-                        label: false,
+                        label: "Exprimez-vous",
                         input_html: { autocomplete: "content", class: "form-control" }
           %>
           <div class="form-group" id="music-form">
             <%= post.input :track_id,
-                           label: false,
+                           label: "Choissisez une musique",
                            input_html: {
                              autocomplete: "off",
                              class: "form-control",
@@ -43,7 +41,7 @@
           <%= post.hidden_field :user_id, value: current_user.id %>
           <%= post.hidden_field :track_id, data: { track_search_target: "trackId" } %>
           <div class="form-actions text-center">
-            <%= button_to "Poster", posts_path(@post), method: :post, class: "btn mt-5 mb-5", id: "new_post_button" %>
+            <%= button_to "Poster", posts_path(@post), method: :post, class: "btn-send", id: "new_post_button" %>
           </div>
         </div>
       <% end %>

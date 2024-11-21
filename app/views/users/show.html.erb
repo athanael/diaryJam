@@ -37,7 +37,32 @@
     <% @last_posts.each do |post| %>
       <%= link_to post_path(post), class: "post-link-wrapper" do %>
         <div class="scroll-post">
-          <%= render "posts/post", post: post %>
+          <!-- start -->
+          <div class="post-card">
+            <div class="post-header d-flex align-items-center justify-content-between">
+              <div class="user-info d-flex align-items-center">
+                <% if !post.user.profile_image_url %>
+                  <%= image_tag "default_user.jpg", alt: "Default Avatar", class: "avatar avatar-circle" %>
+                <% else %>
+                  <%= image_tag post.user.profile_image_url , alt: "Default Avatar", class: "avatar avatar-circle" %>
+                <% end %>
+                <div class="user-details">
+                  <h5 class="username"><%= post.user.username %></h5>
+                  <p class="time-ago"><%= time_ago_in_words(post.created_at) %> ago</p>
+                </div>
+              </div>
+            </div>
+            <div class="post-content">
+              <p> <%= truncate(post.content, length: 140) %></p>
+            </div>
+            <div class="post-media">
+              <iframe src="https://open.spotify.com/embed/track/<%= post.track.spotify_id %>?utm_source=generator"
+                    width="100%" height="152" frameborder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy" style="border-radius: 12px;"></iframe>
+            </div>
+          </div>
+          <!-- end -->
         </div>
       <% end %>
     <% end %>

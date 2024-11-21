@@ -11,7 +11,7 @@
   </div>
 
   <div class="post-content">
-    <p><strong><%= @post.user.username %></strong> <%= truncate(@post.content, length: 100) %>...</p>
+    <p><strong><%= @post.user.username %></strong> <%= truncate(@post.content, length: 100) %></p>
   </div>
 
   <div class="post-media">
@@ -21,19 +21,56 @@
             loading="lazy" style="border-radius: 12px;"></iframe>
   </div>
 
-  <div class="post-footer">
+  <div class="post-footer-show">
     <span class="likes-count">
       <span class="reaction">
         <% if current_user.favorited?(@post) %>
-          <%= button_to '👎', unlike_post_path(@post, from: 'show'), method: :delete, class: 'bouton' %>
+          <%= button_to raw('<i class="fa-solid fa-heart" style="color: #c90d0d;"></i>'), unlike_post_path(@post, from: 'show'), method: :delete, class: 'bouton' %>
         <% else %>
-          <%= button_to '❤️', like_post_path(@post, from: 'show'), method: :post, class: 'bouton' %>
+          <%= button_to raw('<i class="fa-regular fa-heart" style="color: #c90d0d;"></i>'), like_post_path(@post, from: 'show'), method: :post, class: 'bouton' %>
         <% end %>
       </span>
-      <span class="likes">
-        <%= @post.favoritors.count %> likes
+      <div class="likes"></div>
+      <span class="likes" style="color:#888; padding-left:0px; margin-left:0px; font-weight:bold;">
+        <% if @post.favoritors.count > 1 %>
+          <%= @post.favoritors.count %> likes
+        <% else %>
+          <%= @post.favoritors.count %> like
+        <% end %>
       </span>
     </span>
-      <%= link_to "Retour", posts_path, class: "btn btn-outline-secondary btn-sm" %>
+  </div>
+  <div class="comments-section">
+    <div class="comments-list">
+      <% @post.comments.each do |comment| %>
+        <div class="comment">
+          <div class="pic-and-options d-flex justify-content-between">
+            <img src="<%= comment.user.profile_image_url %>" alt="Avatar" class="avatar" />
+            <% if comment.user_id == current_user.id %>
+              <%= button_to raw('<i class="fa-solid fa-x" style="color: #888;"></i>'), post_comment_path(comment, comment_id: comment.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "delete-com"%>
+            <% end %>
+          </div>
+          <div class="comment-body">
+          <div class="comment-header">
+              <strong class="username"><%= comment.user.username %></strong>
+              <span class="timestamp"><%= time_ago_in_words(comment.created_at) %> ago</span>
+          </div>
+            <p class="comment-content"><%= comment.content %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <div class="comment-form">
+      <h3>Leave a Comment</h3>
+      <%= form_with model: [@post, Comment.new], local: true do |f| %>
+        <div class="form-group">
+          <%= f.text_area :content, rows: 2, placeholder: "Écrivez votre commentaire" %>
+        </div>
+        <div class="form-actions">
+          <%= f.submit "Envoyer", class: "btn-submit" %>
+        </div>
+      <% end %>
+    </div>
+      <%= link_to "Retour au fil", posts_path, class: "btn-submit" %>
   </div>
 </div>

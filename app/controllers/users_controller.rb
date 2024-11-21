@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       @recommendations = @recommendation.map { |track| track.uri }
       @data = @recommendations.join(',')
       @recommended_ids = @data.split(',').map { |item| item.split(':').last }
-      @recommended_id = @recommended_ids.sample
+      @recommended_id = @recommended_ids.sample(5)
   end
 
   def followers

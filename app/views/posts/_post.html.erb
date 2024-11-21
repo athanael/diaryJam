@@ -1,42 +1,52 @@
 <div class="post-card">
   <div class="post-header d-flex align-items-center justify-content-between">
-    <div class="user-info d-flex align-items-center">
-      <% if !post.user.profile_image_url %>
-        <%= image_tag "default_user.jpg", alt: "Default Avatar", class: "avatar avatar-circle" %>
-      <% else %>
-        <%= image_tag post.user.profile_image_url , alt: "Default Avatar", class: "avatar avatar-circle" %>
-      <% end %>
-      <div class="user-details">
-        <h5 class="username"><%= post.user.username %></h5>
-        <p class="time-ago"><%= time_ago_in_words(post.created_at) %> ago</p>
+    <%= link_to user_path(post.user) do %>
+      <div class="user-info d-flex align-items-center">
+        <% if !post.user.profile_image_url %>
+          <%= image_tag "default_user.jpg", alt: "Default Avatar", class: "avatar avatar-circle" %>
+        <% else %>
+          <%= image_tag post.user.profile_image_url , alt: "Default Avatar", class: "avatar avatar-circle" %>
+        <% end %>
+        <div class="user-details">
+          <h5 class="username"><%= post.user.username %></h5>
+          <p class="time-ago"><%= time_ago_in_words(post.created_at) %> ago</p>
+        </div>
       </div>
-    </div>
-    <span class="options-icon">⋮</span>
+    <% end %>
+    <% if post.user_id == current_user.id %>
+      <%= button_to raw('<i class="fa-solid fa-x" style="color: #888;"></i>'), post_path(post), method: :delete, class: "dropdown-item", data: { confirm: "Êtes-vous sûr de vouloir supprimer ce post ?" } %>
+    <% end %>
   </div>
-    <div class="post-content">
-      <p> <%= truncate(post.content, length: 140) %>...</p>
-    </div>
-  <div class="post-media">
-    <iframe src="https://open.spotify.com/embed/track/<%= post.track.spotify_id %>?utm_source=generator"
-            width="100%" height="152" frameborder="0" allowfullscreen=""
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy" style="border-radius: 12px;"></iframe>
-  </div>
-
-  <div class="post-footer d-flex align-items-center">
-    <span class="reaction">
-      <% if current_user.favorited?(post) %>
-        <%= button_to '👎', unlike_post_path(post, from: 'index'), method: :delete, class: 'bouton' %>
-      <% else %>
-        <%= button_to '❤️', like_post_path(post, from: 'index'), method: :post, class: 'bouton' %>
+    <% if local_assigns[:show_details_button] %>
+      <%= link_to post_path(post) do %>
+        <div class="post-content">
+          <p> <%= truncate(post.content, length: 140) %></p>
+        </div>
+        <div class="post-media">
+          <iframe src="https://open.spotify.com/embed/track/<%= post.track.spotify_id %>?utm_source=generator"
+                width="100%" height="152" frameborder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy" style="border-radius: 12px;"></iframe>
+        </div>
       <% end %>
-    </span>
-    <span class="likes">
-      <%= post.favoritors.count %> likes
-    </span>
-
-      <% if local_assigns[:show_details_button] %>
-        <%= link_to "Voir les détails", post_path(post), class: "btn btn-outline-secondary btn-sm" %>
+    <% end %>
+    <div class="post-footer d-flex align-items-center">
+      <div class="likes d-flex">
+        <div class="reaction">
+          <% if current_user.favorited?(post) %>
+            <%= button_to raw('<i class="fa-solid fa-heart" style="color: #c90d0d;"></i>'), unlike_post_path(post, from: 'index'), method: :delete, class: 'bouton' %>
+          <% else %>
+            <%= button_to raw('<i class="fa-regular fa-heart" style="color: #c90d0d;"></i>'), like_post_path(post, from: 'index'), method: :post, class: 'bouton' %>
+          <% end %>
+        </div>
+        <div class="d-flex">
+          <%= post.favoritors.count %> likes
+        </div>
+      </div>
+      <%= link_to post_path(post) do %>
+        <div class="commentaires">
+          <span class="likes"><i class="fa-solid fa-comment" style="color: #9a5cdf; padding-top:5px; padding-bottom:3px"></i><%= post.comment_ids.count %> commentaires</span>
+        </div>
       <% end %>
-  </div>
+    </div>
 </div>

@@ -35,18 +35,40 @@
 }
 
 #music-form {
-  background-color: white;
-  border-left: solid 1px $dj-purple;
-  border-right : solid 1px $dj-purple;
+  background-color: transparent;
 }
 
 .track-results {
-  border-top: solid 1px $dj-purple;
-  border-bottom: solid 1px $dj-purple;
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+.track-result-item {
+  border-top: solid 1px $dj-purple-hover;
+  border-bottom: solid 1px $dj-purple-hover;
+  background-color: $dj-purple;
 }
 
 .posts-container {
   width: 80%;
   margin: 35px auto;
   margin-top: 100px;
+}
+
+.btn-send {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 6px 10px;
+  background-color: $dj-purple;
+  color: $dj-purple;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 25px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border: none;
+  width: 100%;
 }

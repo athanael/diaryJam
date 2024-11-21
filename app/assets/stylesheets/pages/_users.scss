@@ -155,7 +155,7 @@
     .carousel-arrow {
       cursor: pointer;
       font-size: 24px;
-      color: #0D6EFD;
+      color: $dj-purple;
       margin: 0 10px;
     }
 
@@ -175,4 +175,9 @@
       }
     }
   }
+}
+
+.recommendations {
+  margin-bottom: 40px;
+
 }

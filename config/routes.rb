@@ -25,7 +25,7 @@ Rails.application.routes.draw do
       delete 'unlike'
     end
 
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :destroy]
   end
 
   resources :tracks do

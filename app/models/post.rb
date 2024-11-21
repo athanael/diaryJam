@@ -6,5 +6,8 @@ class Post < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
+  scope :recents, -> { order(created_at: :desc).limit(10) }
+  scope :followers_posts, -> (followers_id, current_user) { where(user_id: current_user.followers_id).recents }
+
   acts_as_favoritable
 end

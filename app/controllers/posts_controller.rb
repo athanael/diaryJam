@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :require_spotify_auth, only: [:index, :show]
   before_action :spotify_refresh_token
   def index
-    @posts = Post.order(created_at: :desc).limit(10)
+    @posts = Post.followers_posts(current_user.followers_id, current_user)
     @post = Post.new
   end
 

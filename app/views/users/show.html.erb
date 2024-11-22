@@ -2,14 +2,15 @@
   <%= image_tag(@user.profile_image_url, class: 'avatar') if @user.profile_image_url.present? %>
   <h2><%= @user.username %></h2>
   <div class="profile-buttons">
-    <button class="btn-spotify">Mon Spotify</button>
-    <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn-spotify" %>
-
+    <% if @user_id == current_user.id %>
+      <%= button_to "Mon fil d'actualité", posts_path, class: "btn-spotify" %>
+      <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn-spotify" %>
+    <% end %>
     <% if current_user != @user %>
       <% if current_user.following?(@user) %>
-        <%= button_to 'Ne plus suivre', unfollow_user_path(@user), method: :delete, class: 'btn btn-danger' %>
+        <%= button_to 'Ne plus suivre', unfollow_user_path(@user), method: :delete, class: 'btn-spotify' %>
       <% else %>
-        <%= button_to 'Suivre', follow_user_path(@user), method: :post, class: 'btn btn-primary' %>
+        <%= button_to 'Suivre', follow_user_path(@user), method: :post, class: 'btn-spotify' %>
       <% end %>
     <% end %>
   </div>

@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :spotify_refresh_token
   def show
     @user = User.find(params[:id])
+    @user_id = @user.id
     @last_posts = @user.posts.order(created_at: :desc).limit(5)
     @tracks = @user.tracks.order(created_at: :asc).limit(15)
   end

@@ -24,7 +24,7 @@
         </div>
         <div class="post-media">
           <iframe src="https://open.spotify.com/embed/track/<%= post.track.spotify_id %>?utm_source=generator"
-                width="100%" height="152" frameborder="0" allowfullscreen=""
+                width="100%" height="80" frameborder="0" allowfullscreen=""
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                 loading="lazy" style="border-radius: 12px;"></iframe>
         </div>
@@ -44,8 +44,15 @@
         </div>
       </div>
       <%= link_to post_path(post) do %>
-        <div class="commentaires">
-          <span class="likes"><i class="fa-solid fa-comment" style="color: #9a5cdf; padding-top:5px; padding-bottom:3px"></i><%= post.comment_ids.count %> commentaires</span>
+        <div class="likes d-flex">
+          <div class="reaction">
+              <div class="commentaires">
+              <span class="likes"><i class="fa-solid fa-comment" style="color: #9a5cdf; padding-top:5px; padding-bottom:3px"></i></span>
+            </div>
+          </div>
+          <div class="d-flex">
+            <%= post.comment_ids.count %> commentaires
+          </div>
         </div>
       <% end %>
     </div>

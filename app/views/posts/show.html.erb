@@ -9,7 +9,6 @@
         <p class="time-ago"><%= time_ago_in_words(@post.created_at) %> ago</p>
       </div>
     </div>
-    <span class="options-icon">⋮</span>
   </div>
 
   <div class="post-content">
@@ -18,7 +17,7 @@
 
   <div class="post-media">
     <iframe src="https://open.spotify.com/embed/track/<%= @post.track.spotify_id %>?utm_source=generator"
-            width="100%" height="152" frameborder="0" allowfullscreen=""
+            width="100%" height="80" frameborder="0" allowfullscreen=""
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             loading="lazy" style="border-radius: 12px;"></iframe>
   </div>
@@ -63,7 +62,6 @@
       <% end %>
     </div>
   <div class="comment-form">
-      <h3>Leave a Comment</h3>
       <%= form_with model: [@post, Comment.new], local: true do |f| %>
         <div class="form-group">
           <%= f.text_area :content, rows: 2, placeholder: "Écrivez votre commentaire" %>

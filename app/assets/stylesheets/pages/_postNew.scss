@@ -22,12 +22,18 @@
   width : 100%;
   & form {
     width: 90%;
-
+    & label {
+      display: block;
+      margin-top: 10px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
   }
   & textarea {
     width: 100%;
     height: 20px;
-    padding: 0px;
+    border: 1px, solid, #888;
+    padding: 5px;
     & focus {
       background-color: rgb(248, 202, 117);
     }
@@ -41,12 +47,17 @@
 .track-results {
   max-height: 200px;
   overflow-y: scroll;
+  border-radius: 20px;
 }
 
 .track-result-item {
   border-top: solid 1px $dj-purple-hover;
   border-bottom: solid 1px $dj-purple-hover;
   background-color: $dj-purple;
+  padding: 11px;
+  color: white;
+  font-family: "Anek Devanagari", "Helvetica", "sans-serif";
+  font-weight: 500;
 }
 
 .posts-container {

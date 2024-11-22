@@ -57,6 +57,7 @@
   font-size: 14px;
   font-weight: bold;
   text-decoration: none;
+  border-radius: 20px;
 }
 
 .profile-header .btn-spotify:hover,
@@ -70,10 +71,11 @@
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 30px;
   padding: 0 20px;
 }
 
-.activity-feed h3 {
+.activity-feed h3, .track-carousel h3, .recommendations h3 {
   font-size: 20px;
   font-weight: bold;
   color: #333;
@@ -115,6 +117,8 @@
   & p {
     margin: 8px;
     color: #333;
+    font-family: "Anek Devanagari", "Helvetica", "sans-serif";
+    font-weight: bold;
   }
   & a {
     text-decoration: none;
@@ -137,6 +141,12 @@
   *display:inline;/* For IE7*/
   *zoom:1;/* For IE7*/
   vertical-align:top;
+  background-color: rgb(248, 202, 117);
+  border-radius: 8px;
+}
+
+.username, .time-ago {
+  margin-bottom: 0;
 }
 
 .track-carousel {

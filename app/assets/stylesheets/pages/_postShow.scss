@@ -56,6 +56,15 @@
   margin: 0 auto;
 }
 
+#comment_content {
+  border: 2px solid $dj-purple;
+  &::placeholder {
+    color: #888;
+    font-family: "Anek Devanagari", "Helvetica", "sans-serif";
+    font-weight: 600;
+  }
+}
+
 a {
   text-decoration: none;
   color : #888;

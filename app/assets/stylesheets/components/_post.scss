@@ -155,7 +155,16 @@
     margin-bottom: 10px;
     padding: 8px;
     background: #f7f7f7;
+    border: 2px solid $dj-purple-hover;
     border-radius: 5px;
+    padding: 10px 20px;
+  }
+
+  .comment-content {
+    font-size: 1.1em;
+    margin-top: 18px;
+    font-family: "Anek Devanagari", "Helvetica", "sans-serif";
+    color: black;
   }
 }
 

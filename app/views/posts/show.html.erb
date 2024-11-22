@@ -46,16 +46,17 @@
       <% @post.comments.each do |comment| %>
         <div class="comment">
           <div class="pic-and-options d-flex justify-content-between">
-            <img src="<%= comment.user.profile_image_url %>" alt="Avatar" class="avatar" />
+            <div class="pics-and-avatar d-flex flex-column-reverse align-items-center">
+              <div class="comment-header">
+                <strong class="username"><%= comment.user.username %></strong>
+              </div>
+              <img src="<%= comment.user.profile_image_url %>" alt="Avatar" class="avatar" />
+            </div>
             <% if comment.user_id == current_user.id %>
               <%= button_to raw('<i class="fa-solid fa-x" style="color: #888;"></i>'), post_comment_path(comment, comment_id: comment.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "delete-com"%>
             <% end %>
           </div>
           <div class="comment-body">
-          <div class="comment-header">
-              <strong class="username"><%= comment.user.username %></strong>
-              <span class="timestamp"><%= time_ago_in_words(comment.created_at) %> ago</span>
-          </div>
             <p class="comment-content"><%= comment.content %></p>
           </div>
         </div>
